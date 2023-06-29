@@ -1,0 +1,19 @@
+@GetMapping("admin/newspec")
+	public String showSpecForm(Model model) {
+		model.addAttribute("SpecializationInput", new SpecializationInput());
+		return "/admin/newspec";
+	}
+
+	@PostMapping("admin/newspec")
+	public String processSpec(@ModelAttribute("SpecializationInput") @Validated SpecializationInput SpecializationInput,
+			BindingResult bindingResult, Model model) {
+		System.out.println("in contrller");
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("errors", bindingResult.getAllErrors());
+			System.out.println(bindingResult.getAllErrors());
+			return "/admin/newspec";
+		}
+		// Perform login logic here
+
+		return "redirect:/admin/";
+	}
